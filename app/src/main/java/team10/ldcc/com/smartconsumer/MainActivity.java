@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,15 +17,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.zhangjingjing.autoscrolbanner.CycleViewpager;
+import com.zhangjingjing.autoscrolbanner.PagerIndicator;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +42,7 @@ import retrofit2.Response;
 
 import team10.ldcc.com.smartconsumer.Data.Cart;
 import team10.ldcc.com.smartconsumer.Data.Product;
+import team10.ldcc.com.smartconsumer.common.Util;
 import team10.ldcc.com.smartconsumer.retrofitService.NetworkService;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private DialogProductDetail dialogProductDetail;
     private DialogProductNumberPicker dialogProductNumberPicker;
     private DatePickerDialog dialogDatePicker;
+    private DialogProducDelivery dialogProducDelivery;
 
     private String product_code;
     private String product_delivery;
@@ -134,10 +142,14 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener click_add_cart = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            dialogProducDelivery = new DialogProducDelivery(MainActivity.this);
+            dialogProducDelivery.show();
+//            dialogDatePicker = new DatePickerDialog(MainActivity.this, listener, 2017, 6, 31);
+//            dialogDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+//            dialogDatePicker.show();
 
-            dialogDatePicker = new DatePickerDialog(MainActivity.this, listener, 2017, 6, 31);
-            dialogDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
-            dialogDatePicker.show();
+
+
             //            dialogProductNumberPicker = new DialogProductNumberPicker(MainActivity.this);
             //            dialogProductNumberPicker.show();
         }
@@ -239,7 +251,9 @@ public class MainActivity extends AppCompatActivity {
     private ProductRecyclerAdapter adapter;
     private NestedScrollView myScrollingContent;
     private View view_home;
-
+    private CycleViewpager mAutoVp;
+    private PagerIndicator mIndicator;
+    private List<String> imgUrls;
     private void selectTop10(){
         Call<List<Product>> call = networkService.selectTop10();
         call.enqueue(new Callback<List<Product>>() {
@@ -289,6 +303,17 @@ public class MainActivity extends AppCompatActivity {
                 view = inflater.inflate(R.layout.activity_home, frame, false);
                 Log.e(TAG, "" + 0);
 //                productList = new ArrayList<>();
+                imgUrls = new ArrayList<>();
+                imgUrls.add("http://52.78.34.142:3000/images/home/img_home.png");
+                imgUrls.add("http://52.78.34.142:3000/images/home/img_home2.jpg");
+                mAutoVp = (CycleViewpager) view.findViewById(R.id.vp_auto);
+                mIndicator = (PagerIndicator) view.findViewById(R.id.pi_indicator);
+                MyPagerAdapter adaptermy = new MyPagerAdapter(this, imgUrls);
+                mAutoVp.setAdapter(adaptermy);
+                mAutoVp.setOffscreenPageLimit(2);
+                mAutoVp.startAutoScroll();
+                mIndicator.setViewpager(mAutoVp);
+
 
                 myScrollingContent = (NestedScrollView) view.findViewById(R.id.myScrollingContent);
                 view_home = view;
@@ -387,5 +412,45 @@ public class MainActivity extends AppCompatActivity {
             backPressedTime = tempTime;
             Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private class MyPagerAdapter extends PagerAdapter {
+        private Context mContext;
+        private List<String> mUrls;
+        public MyPagerAdapter(Context context,List<String> imgUrls) {
+            this.mContext = context;
+            this.mUrls = imgUrls;
+        }
+
+
+        @Override
+        public int getCount() {
+            return mUrls.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            ImageView imageView = new ImageView(mContext);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            Glide.with(mContext).load(mUrls.get(position)).into(imageView);
+            ViewGroup par = (ViewGroup) imageView.getParent();
+            if(par!=null){
+                par.removeView(imageView);
+            }
+            container.addView(imageView, lp);
+            return imageView;
+        }
+
     }
 }

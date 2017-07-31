@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -155,47 +156,47 @@ public class StringUtil {
 //        return imagePath;
 //    }
 //
-//    /**
-//     * 캘린더 객체를 가지고 0000년 00월00일(월) 형태로 데이터를 변환.
-//     *
-//     * @param calendar : 변환할 calendar
-//     * @return 0000년 00월00일(월)
-//     */
-//    public static String calendarToFullDateStr(Calendar calendar) {
-//        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+    /**
+     * 캘린더 객체를 가지고 0000년 00월00일(월) 형태로 데이터를 변환.
+     *
+     * @param calendar : 변환할 calendar
+     * @return 0000년 00월00일(월)
+     */
+    public static String calendarToFullDateStr(Calendar calendar) {
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        String toDateStr = calendar.get(Calendar.YEAR) + "년" + " " +
+                (calendar.get(Calendar.MONTH) + 1) + "월" +
+                calendar.get(Calendar.DAY_OF_MONTH) + "일" + "(" + dayOfWeek(dayOfWeek) + ")";
+
+        return toDateStr;
+    }
 //
-//        String toDateStr = calendar.get(Calendar.YEAR) + "년" + " " +
-//                (calendar.get(Calendar.MONTH) + 1) + "월" +
-//                calendar.get(Calendar.DAY_OF_MONTH) + "일" + "(" + dayOfWeek(dayOfWeek) + ")";
-//
-//        return toDateStr;
-//    }
-//
-//    /**
-//     * 캘린더의 int 형 요일 데이터를 한글로 변환.
-//     *
-//     * @param dayOfWeek : int 형 요일 데이터
-//     * @return 해당요일(예: 월)
-//     */
-//    public static String dayOfWeek(int dayOfWeek) {
-//        switch (dayOfWeek) {
-//            case 1:
-//                return "일";
-//            case 2:
-//                return "월";
-//            case 3:
-//                return "화";
-//            case 4:
-//                return "수";
-//            case 5:
-//                return "목";
-//            case 6:
-//                return "금";
-//            case 7:
-//                return "토";
-//        }
-//        return "";
-//    }
+    /**
+     * 캘린더의 int 형 요일 데이터를 한글로 변환.
+     *
+     * @param dayOfWeek : int 형 요일 데이터
+     * @return 해당요일(예: 월)
+     */
+    public static String dayOfWeek(int dayOfWeek) {
+        switch (dayOfWeek) {
+            case 1:
+                return "일";
+            case 2:
+                return "월";
+            case 3:
+                return "화";
+            case 4:
+                return "수";
+            case 5:
+                return "목";
+            case 6:
+                return "금";
+            case 7:
+                return "토";
+        }
+        return "";
+    }
 //
 //    /**
 //     * 캘린더 객체를 가지고 오전 00시 으로 형태로 변환.

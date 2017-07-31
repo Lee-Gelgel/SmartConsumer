@@ -10,6 +10,7 @@ public class Product implements Serializable{
     private String product_name;
     private String product_info;
     private String product_price;
+    private String product_count;
     private String product_image;
     private String productDetail_code;
     private String productBase_code;
@@ -91,5 +92,13 @@ public class Product implements Serializable{
 
     public void setProduct_image(String product_image) {
         this.product_image = product_image;
+    }
+
+    public String getProduct_count() {
+        return product_count;
+    }
+
+    public void setProduct_count(String product_count) {
+        this.product_count = product_count;
     }
 }

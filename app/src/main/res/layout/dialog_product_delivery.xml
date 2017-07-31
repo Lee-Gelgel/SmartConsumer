@@ -4,23 +4,346 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
-
-    <NumberPicker
-        android:id="@+id/numberpicker"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btn_back2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="뒤로가기"/>
+    <RelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </NumberPicker>
+        <Button
+            android:id="@+id/calendar_year_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="2017년 5월" />
 
-    <Button
-    android:id="@+id/btn_back"
-    android:layout_alignParentLeft="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="뒤로가기"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="+" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top">
+
+        <LinearLayout
+            android:id="@+id/layout_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="일"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="월" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="화" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="수" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="목" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="금" />
+
+                <TextView
+                    style="@style/CalendarDays"
+                    android:text="토"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_1"
+                    style="@style/CalendarDay"
+                    android:text=""
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_2"
+                    style="@style/CalendarDay"
+                    android:text="1" />
+
+                <TextView
+                    android:id="@+id/calendar_day_3"
+                    style="@style/CalendarDay"
+                    android:text="2" />
+
+                <TextView
+                    android:id="@+id/calendar_day_4"
+                    style="@style/CalendarDay"
+                    android:text="3" />
+
+                <TextView
+                    android:id="@+id/calendar_day_5"
+                    style="@style/CalendarDay"
+                    android:text="4" />
+
+                <TextView
+                    android:id="@+id/calendar_day_6"
+                    style="@style/CalendarDay"
+                    android:text="5" />
+
+                <TextView
+                    android:id="@+id/calendar_day_7"
+                    style="@style/CalendarDay"
+                    android:text="6"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_8"
+                    style="@style/CalendarDay"
+                    android:text="7"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_9"
+                    style="@style/CalendarDay"
+                    android:text="8" />
+
+                <TextView
+                    android:id="@+id/calendar_day_10"
+                    style="@style/CalendarDay"
+                    android:text="9" />
+
+                <TextView
+                    android:id="@+id/calendar_day_11"
+                    style="@style/CalendarDay"
+                    android:text="10" />
+
+                <TextView
+                    android:id="@+id/calendar_day_12"
+                    style="@style/CalendarDay"
+                    android:text="11" />
+
+                <TextView
+                    android:id="@+id/calendar_day_13"
+                    style="@style/CalendarDay"
+                    android:text="12" />
+
+                <TextView
+                    android:id="@+id/calendar_day_14"
+                    style="@style/CalendarDay"
+                    android:text="13"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_15"
+                    style="@style/CalendarDay"
+                    android:text="14"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_16"
+                    style="@style/CalendarDay"
+                    android:text="15" />
+
+                <TextView
+                    android:id="@+id/calendar_day_17"
+                    style="@style/CalendarDay"
+                    android:text="16" />
+
+                <TextView
+                    android:id="@+id/calendar_day_18"
+                    style="@style/CalendarDay"
+                    android:text="17" />
+
+                <TextView
+                    android:id="@+id/calendar_day_19"
+                    style="@style/CalendarDay"
+                    android:text="18" />
+
+                <TextView
+                    android:id="@+id/calendar_day_20"
+                    style="@style/CalendarDay"
+                    android:text="19" />
+
+                <TextView
+                    android:id="@+id/calendar_day_21"
+                    style="@style/CalendarDay"
+                    android:text="20"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_22"
+                    style="@style/CalendarDay"
+                    android:text="21"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_23"
+                    style="@style/CalendarDay"
+                    android:text="22" />
+
+                <TextView
+                    android:id="@+id/calendar_day_24"
+                    style="@style/CalendarDay"
+                    android:text="23" />
+
+                <TextView
+                    android:id="@+id/calendar_day_25"
+                    style="@style/CalendarDay"
+                    android:text="24" />
+
+                <TextView
+                    android:id="@+id/calendar_day_26"
+                    style="@style/CalendarDay"
+                    android:text="25" />
+
+                <TextView
+                    android:id="@+id/calendar_day_27"
+                    style="@style/CalendarDay"
+                    android:text="26" />
+
+                <TextView
+                    android:id="@+id/calendar_day_28"
+                    style="@style/CalendarDay"
+                    android:text="27"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_29"
+                    style="@style/CalendarDay"
+                    android:text="28"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_30"
+                    style="@style/CalendarDay"
+                    android:text="29" />
+
+                <TextView
+                    android:id="@+id/calendar_day_31"
+                    style="@style/CalendarDay"
+                    android:text="30" />
+
+                <TextView
+                    android:id="@+id/calendar_day_32"
+                    style="@style/CalendarDay"
+                    android:text="31" />
+
+                <TextView
+                    android:id="@+id/calendar_day_33"
+                    style="@style/CalendarDay"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/calendar_day_34"
+                    style="@style/CalendarDay"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/calendar_day_35"
+                    style="@style/CalendarDay"
+                    android:text=""
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_week6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calendar_day_36"
+                    style="@style/CalendarDay"
+                    android:text="28"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/calendar_day_37"
+                    style="@style/CalendarDay"
+                    android:text="29" />
+
+                <TextView
+                    android:id="@+id/calendar_day_38"
+                    style="@style/CalendarDay"
+                    android:text="30" />
+
+                <TextView
+                    android:id="@+id/calendar_day_39"
+                    style="@style/CalendarDay"
+                    android:text="31" />
+
+                <TextView
+                    android:id="@+id/calendar_day_40"
+                    style="@style/CalendarDay"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/calendar_day_41"
+                    style="@style/CalendarDay"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/calendar_day_42"
+                    style="@style/CalendarDay"
+                    android:text=""
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
     <!--<RelativeLayout-->
         <!--android:layout_margin="20dp"-->
         <!--android:background="@color/colorOrange"-->

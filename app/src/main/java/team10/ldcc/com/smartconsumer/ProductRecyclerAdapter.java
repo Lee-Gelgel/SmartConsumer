@@ -2,9 +2,11 @@ package team10.ldcc.com.smartconsumer;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     private Context mContext;
     public List<Product> productList;
     private DatePickerDialog dialogDatePicker;
+    private DialogProducDelivery dialogProducDelivery;
+    private DialogProducDelivery2 dialogProducDelivery2;
+    private DialogProductNumberPicker dialogProductNumberPicker;
+    private int itemNum = 0;
     public ProductRecyclerAdapter(List<Product> productList, Context mContext) {
         this.productList = productList;
         this.mContext = mContext;
@@ -42,6 +48,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         public TextView price;
         public ImageView cart;
         public ImageView image_medal;
+        private TextView textview_count;
         private LinearLayout layout_count;
         public ViewHolder(View view) {
             super(view);
@@ -51,6 +58,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             cart = (ImageView) view.findViewById(R.id.btn_buy);
             image_medal = (ImageView) view.findViewById(R.id.image_medal);
             layout_count = (LinearLayout) view.findViewById(R.id.layout_count);
+            textview_count = (TextView) view.findViewById(R.id.textview_count);
         }
     }
 
@@ -66,22 +74,9 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        switch(position){
-            case 0:
-                holder.image_medal.setImageResource(R.drawable.first);
-                break;
-            case 1:
-                holder.image_medal.setImageResource(R.drawable.second);
-                break;
-            case 2:
-                holder.image_medal.setImageResource(R.drawable.third);
-                break;
-            default:
-                holder.image_medal.setVisibility(View.GONE);
-                break;
-        }
+
         Glide.with(mContext).load(mContext.getResources().getString(R.string.baseURL) + productList.get(position).getProduct_image())
-                .placeholder(R.drawable.img_cider)
+                .placeholder(0)
                 .into(holder.img);
         holder.name.setText(productList.get(position).getProduct_name());
         int price = Integer.parseInt(productList.get(position).getProduct_price());
@@ -89,15 +84,25 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         holder.layout_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DialogProductNumberPicker(mContext).show();
+                dialogProductNumberPicker = new DialogProductNumberPicker(mContext, btnOk);
+                dialogProductNumberPicker.show();
+                itemNum = position;
             }
         });
+
+        holder.textview_count.setText(productList.get(position).getProduct_count() == null ? "1" : productList.get(position).getProduct_count());
         holder.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogDatePicker = new DatePickerDialog(mContext, listener, 2017, 6, 31);
-                dialogDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
-                dialogDatePicker.show();
+
+//                dialogProducDelivery = new DialogProducDelivery(mContext);
+//                dialogProducDelivery.show();
+                dialogProducDelivery2 = new DialogProducDelivery2(mContext);
+                dialogProducDelivery2.show();
+
+//                dialogDatePicker = new DatePickerDialog(mContext, listener, 2017, 6, 31);
+//                dialogDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+//                dialogDatePicker.show();
             }
         });
 //
@@ -118,7 +123,25 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 //                    Toast.makeText(mContext,"로그인 후 결제 가능합니다",Toast.LENGTH_LONG).show();
 //                }
 //            }
-//        });
+//        }
+
+        switch(position){
+            case 0:
+                holder.image_medal.setVisibility(View.VISIBLE);
+                holder.image_medal.setImageResource(R.drawable.first);
+                break;
+            case 1:
+                holder.image_medal.setVisibility(View.VISIBLE);
+                holder.image_medal.setImageResource(R.drawable.second);
+                break;
+            case 2:
+                holder.image_medal.setVisibility(View.VISIBLE);
+                holder.image_medal.setImageResource(R.drawable.third);
+                break;
+            default:
+                holder.image_medal.setVisibility(View.GONE);
+                break;
+        }
     }
 
     @Override
@@ -131,6 +154,16 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         Toast.makeText(mContext, year + "년" + monthOfYear + "월" + dayOfMonth +"일", Toast.LENGTH_SHORT).show();
 //          product_delivery = year + "." + (monthOfYear + 1) + "." + dayOfMonth;
 //            addCart();
+        }
+    };
+
+    View.OnClickListener btnOk = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.e("abc", "btnOk_" + dialogProductNumberPicker.setNumber());
+            productList.get(itemNum).setProduct_count("" + dialogProductNumberPicker.setNumber());
+            notifyDataSetChanged();
+            dialogProductNumberPicker.dismiss();
         }
     };
 
