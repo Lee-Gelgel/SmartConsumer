@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#BDD4DE</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorHint">#969696</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#FF0000</color>
+
+    <color name="colorBlack87pro">#DE000000</color>
+    <color name="colorBlack38pro">#61000000</color>
+    <color name="colorBlack54pro">#8A000000</color>
+    <color name="colorBlack46pro">#75000000</color>
+    <color name="colorBlack21">#212121</color>
+    <color name="colorBlack41">#414141</color>
+
+    <color name="colorOrange">#f77722</color>
+    <color name="colorBtnSkip">#795548</color>
+    <color name="colorLightGray">#cccccc</color>
+    <color name="colorInsertBoarder">#f6f6f6</color>
+    <color name="colorGray">#dddddd</color>
+    <color name="colorBorderLine">#e0e0e0</color>
+    <color name="colorProfileBorderLine">#dbdbdb</color>
+    <color name="colorSettingBorderBg">#f6f6f6</color>
+    <color name="colorListLine">#e0e0e0</color>
+    <color name="colorClassPlaceHolder">#d0d0d0</color>
+    <color name="colorBackgroundDark">#ededed</color>
+    <color name="colorBackground">#fafafa</color>
+    <color name="colorWarmGrey">#757575</color>
+    <color name="colorEditTextHint">#9e9e9e</color>
+
+    <color name="colorDisableButtonText">#9a5315</color>
+
+    <color name="colorDefaultFont">#252525</color>
+    <color name="colorDefaultDim">#66000000</color>
+    <color name="colorCategorytDim">#99000000</color>
+
+    <color name="colorEmpty">#e5e5e5</color>
+
+    <color name="colorHeaderTitle">#e5d3c3</color>
+
+    <color name="colorRoundBackground">#242424</color>
+    <color name="colorMessengerProfileBackground">#f3f3f3</color>
+
+    <color name="colorMessengerDateBorder">#e6e6e6</color>
+    <color name="colorGuideDisable">#737373</color>
+</resources>

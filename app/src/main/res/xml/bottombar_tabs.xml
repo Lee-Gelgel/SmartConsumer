@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home_24"
+        barColorWhenSelected="@color/colorPrimary"
+        title="Home" />
+    <tab
+        id="@+id/tab_cart"
+        icon="@drawable/ic_cart_24"
+        barColorWhenSelected="@color/colorPrimary"
+        title="Cart" />
+    <tab
+        id="@+id/tab_recipe"
+        icon="@drawable/ic_recipe_24"
+        barColorWhenSelected="@color/colorPrimary"
+        title="Recipe" />
+    <tab
+        id="@+id/tab_setting"
+        icon="@drawable/ic_setting_24"
+        barColorWhenSelected="@color/colorPrimary"
+        title="Setting" />
+</tabs>

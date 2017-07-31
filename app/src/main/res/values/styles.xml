@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimary">#2B3A42</item>
+        <item name="colorPrimaryDark">#2B3A42</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorOrange</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/default_guide_text_size</item>
+        <item name="android:textColor">@color/colorOrange</item>
+    </style>
+    <style name="TextInputEditStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorBlack38pro</item>
+        <item name="colorControlActivated">@color/colorOrange</item>
+        <item name="colorControlHighlight">@color/colorOrange</item>
+    </style>
+    <style name="TextInputEditStyleNone" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+    </style>
+
+    <style name="DefaultButton">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorOrange</item>
+    </style>
+
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorHint</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="GenderRadioTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorLightGray</item>
+        <item name="colorControlActivated">@color/colorOrange</item>
+    </style>
+</resources>

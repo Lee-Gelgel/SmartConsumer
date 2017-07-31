@@ -1,0 +1,66 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_layout_margin">24dp</dimen>
+
+    <!--사이즈 -->
+    <dimen name="default_class_padding_size">8dp</dimen>
+    <dimen name="default_padding_size">20dp</dimen>
+    <dimen name="default_button_size">48dp</dimen>
+    <dimen name="default_bottom_button_size">51dp</dimen>
+    <dimen name="default_checkbox_size">24dp</dimen>
+    <dimen name="default_step_image_size">12dp</dimen>
+    <dimen name="default_logo_size">100dp</dimen>
+    <dimen name="default_profile_img_size">90dp</dimen>
+    <dimen name="default_big_icon_size">88dp</dimen>
+    <dimen name="default_small_icon_size">60dp</dimen>
+    <dimen name="default_button_icon_size">24dp</dimen>
+    <dimen name="default_input_edit_layout_size">85dp</dimen>
+    <dimen name="default_input_edit_size">50dp</dimen>
+    <dimen name="default_right_padding_size">28dp</dimen>
+    <dimen name="default_text_line_height_size">4dp</dimen>
+
+    <!--글자 크기-->
+    <dimen name="default_big_title_text_size">24sp</dimen>
+    <dimen name="header_title_size">20sp</dimen>
+    <dimen name="rating_num_size">21sp</dimen>
+    <dimen name="default_sub_title_text_size">18sp</dimen>
+    <dimen name="content_title_size">16sp</dimen>
+    <dimen name="content_title_mini_size">15sp</dimen>
+    <dimen name="default_sub_text_size">14sp</dimen>
+    <dimen name="default_sub_text2_size">13sp</dimen>
+    <dimen name="default_button_text_size">18sp</dimen>
+    <dimen name="default_button_middle_text_size">16sp</dimen>
+    <dimen name="default_guide_text_size">12sp</dimen>
+    <dimen name="default_guide_text_mini_size">10sp</dimen>
+
+    <dimen name="default_popup_text_size">15sp</dimen>
+
+    <!-- 폰트 사이즈 정리-->
+    <dimen name="text_size_h1">24sp</dimen>
+    <dimen name="text_size_h4">18sp</dimen>
+    <dimen name="text_size_dialog_default">15sp</dimen>
+    <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_error">13sp</dimen>
+    <dimen name="text_size_nick">20sp</dimen>
+    <dimen name="text_size_date">11sp</dimen>
+    <dimen name="text_size_message">12sp</dimen>
+
+    <dimen name="fixed_text_size_h1">24dp</dimen>
+    <dimen name="fixed_text_size_h2">22dp</dimen>
+    <dimen name="fixed_text_size_nick">20dp</dimen>
+    <dimen name="fixed_text_size_h4">18dp</dimen>
+    <dimen name="fixed_text_size_dialog_count">17dp</dimen>
+    <dimen name="fixed_text_size_default">16dp</dimen>
+    <dimen name="fixed_text_size_dialog_default">15dp</dimen>
+    <dimen name="fixed_text_size_base">14dp</dimen>
+    <dimen name="fixed_text_size_error">13dp</dimen>
+    <dimen name="fixed_text_size_message">12dp</dimen>
+    <dimen name="fixed_text_size_date">11dp</dimen>
+    <dimen name="fixed_text_size_new_count">10dp</dimen>
+
+    <!--스피너-->
+    <dimen name="spinner_max_height">208dp</dimen>
+</resources>

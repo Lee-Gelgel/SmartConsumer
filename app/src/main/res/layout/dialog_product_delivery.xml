@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <NumberPicker
+        android:id="@+id/numberpicker"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </NumberPicker>
+
+    <Button
+    android:id="@+id/btn_back"
+    android:layout_alignParentLeft="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="뒤로가기"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:background="@color/colorOrange"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+       <!-- -->
+        <!-- -->
+        <!--<DatePicker-->
+            <!--android:datePickerMode="calendar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_back"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="뒤로가기"/>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp">-->
+
+        <!--<TextView-->
+            <!--android:textSize="22sp"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@color/colorOrange"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:id="@+id/btn_add_cart"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="장바구니담기"/>-->
+        <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
+
+</LinearLayout>

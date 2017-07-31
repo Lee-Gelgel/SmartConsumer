@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="328dp"
+        android:layout_height="431dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorOrange"
+            android:gravity="center_vertical"
+            android:paddingLeft="26dp"
+            android:text="생년월일을 선택해주세요."
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+
+            <team10.ldcc.com.smartconsumer.common.DatePicker.DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="68dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="8dp"
+                        android:id="@+id/button_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/cancel"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:padding="8dp"
+                        android:id="@+id/button_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/confirm"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <!-- <LinearLayout
+                     android:id="@+id/select_layout"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal">-->
+
+                <TextView
+                    android:id="@+id/text_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="147dp"
+
+                    android:gravity="center"
+                    android:text="1990"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/text_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="147dp"
+
+                    android:text="11"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/text_day"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="250dp"
+                    android:layout_marginTop="147dp"
+
+                    android:gravity="center"
+                    android:text="28"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="22sp" />
+
+
+                <!-- </LinearLayout>-->
+
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="right|bottom"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:id="@+id/button_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="26dp"
+                        android:text="취소"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/button_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="확인"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="14sp" />
+
+                </LinearLayout>-->
+
+            </RelativeLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
