@@ -24,14 +24,17 @@ import team10.ldcc.com.smartconsumer.common.StringUtil;
  */
 public class DialogProducDelivery2 extends Dialog  {
 
+    private TextView textview_cancel;
+    private TextView textview_confirm;
     private MaterialCalendarView widget;
+    private String delivery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    public DialogProducDelivery2(Context mContext) {
+    public DialogProducDelivery2(Context mContext,View.OnClickListener btn_delivery) {
         super(mContext, android.R.style.Theme_Translucent_NoTitleBar);
         WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();
         lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
@@ -46,17 +49,35 @@ public class DialogProducDelivery2 extends Dialog  {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         widget.state().edit()
                 .setMinimumDate(CalendarDay.from(year,month+1,day))
-                .setMaximumDate(CalendarDay.from(year,month+2,day));
+                .setMaximumDate(CalendarDay.from(year, month + 2, day));
 
         widget.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
                 Log.e("aaa",""+getSelectedDatesString());
+                delivery = date.getYear()+""+(date.getMonth()+1)+""+date.getDay();
             }
         });
 //        widget.setOnMonthChangedListener(this);
+
+
+        textview_cancel = (TextView) findViewById(R.id.textview_cancel);
+        textview_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        textview_confirm = (TextView) findViewById(R.id.textview_confirm);
+        textview_confirm.setOnClickListener(btn_delivery);
     }
 
+
+    public String getDelivery(){
+
+        return delivery;
+    }
 
     private String getSelectedDatesString() {
         CalendarDay date = widget.getSelectedDate();

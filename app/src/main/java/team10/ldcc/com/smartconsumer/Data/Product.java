@@ -14,6 +14,7 @@ public class Product implements Serializable{
     private String product_image;
     private String productDetail_code;
     private String productBase_code;
+    private String productBase_weight;
 
     public Product(String product_code, String product_name, String product_info, String product_price, String product_image) {
         this.product_code = product_code;
@@ -36,6 +37,14 @@ public class Product implements Serializable{
                 ", product_name='" + product_name + '\'' +
                 ", product_code='" + product_code + '\'' +
                 '}';
+    }
+
+    public String getProductBase_weight() {
+        return productBase_weight;
+    }
+
+    public void setProductBase_weight(String productBase_weight) {
+        this.productBase_weight = productBase_weight;
     }
 
     public String getProductDetail_code() {

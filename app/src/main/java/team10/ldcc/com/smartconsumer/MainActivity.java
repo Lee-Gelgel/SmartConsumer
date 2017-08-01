@@ -263,8 +263,6 @@ public class MainActivity extends AppCompatActivity {
                     productList = new ArrayList<>();
                     productList = response.body();
                     Log.e(TAG,"list : "+productList.size());
-
-
                     recyclerView = (RecyclerView) view_home.findViewById(R.id.recyclerView);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setNestedScrollingEnabled(false);

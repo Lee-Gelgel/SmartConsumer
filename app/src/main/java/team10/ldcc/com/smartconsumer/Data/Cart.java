@@ -94,12 +94,14 @@ public class Cart implements Serializable {
     @Override
     public String toString() {
         return "Cart{" +
-                "product_image='" + product_image + '\'' +
-                ", product_delivery='" + product_delivery + '\'' +
-                ", product_count='" + product_count + '\'' +
-                ", product_name='" + product_name + '\'' +
+                "user_code='" + user_code + '\'' +
                 ", productDetail_code='" + productDetail_code + '\'' +
-                ", user_code='" + user_code + '\'' +
+                ", cart_count='" + cart_count + '\'' +
+                ", cart_delivery='" + cart_delivery + '\'' +
+                ", product_name='" + product_name + '\'' +
+                ", product_count='" + product_count + '\'' +
+                ", product_delivery='" + product_delivery + '\'' +
+                ", product_image='" + product_image + '\'' +
                 '}';
     }
 }
