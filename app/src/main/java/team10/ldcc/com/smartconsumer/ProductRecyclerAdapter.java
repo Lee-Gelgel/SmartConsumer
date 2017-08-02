@@ -96,9 +96,14 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         holder.layout_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogProductNumberPicker = new DialogProductNumberPicker(mContext, btnOk);
-                dialogProductNumberPicker.show();
                 itemNum = position;
+                int num = 1;
+                if(null!=productList.get(position).getProduct_count()){
+                    num = Integer.parseInt(productList.get(position).getProduct_count());
+                }
+                dialogProductNumberPicker = new DialogProductNumberPicker(mContext, btnOk, num);
+                dialogProductNumberPicker.show();
+
             }
         });
         holder.item_weight.setText(productList.get(position).getProductBase_weight());

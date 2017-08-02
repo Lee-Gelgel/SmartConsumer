@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="team10.ldcc.com.smartconsumer" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="team10.ldcc.com.smartconsumer">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ApplicationController"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:allowBackup="false"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup,icon">
+
         <activity
             android:name=".IntroActivity"
             android:label="@string/app_name" >
@@ -33,5 +37,33 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service
+            android:name="com.laboratory.ldcc.wave.downstream.WaveTokenService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.laboratory.ldcc.wave.downstream.WaveService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+
+        </service>
+
+        <receiver android:name="team10.ldcc.com.smartconsumer.WaveMessageReceiver">
+            <intent-filter>
+                <action android:name="com.84.ldcc.wave.MESSAGING_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="team10.ldcc.com.smartconsumer.DefaultOpenReceiver">
+            <intent-filter>
+                <action android:name="com.84.ldcc.wave.MESSAGING_OPENED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "425433739096",
+    "firebase_url": "https://ldcc10-e6dbb.firebaseio.com",
+    "project_id": "ldcc10-e6dbb",
+    "storage_bucket": "ldcc10-e6dbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425433739096:android:feda216e1f3c6ee3",
+        "android_client_info": {
+          "package_name": "team10.ldcc.com.smartconsumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425433739096-i6s0f4ontt2qqk2r2bo72opa168ii8le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeEJKf9ff3PHHcqU3heFzOW9lj5ibgxS4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,7 +28,7 @@ public class DialogProductNumberPicker extends Dialog {
         super.onCreate(savedInstanceState);
     }
 
-    public DialogProductNumberPicker(Context mContext,View.OnClickListener btnOk) {
+    public DialogProductNumberPicker(Context mContext,View.OnClickListener btnOk, int num) {
         super(mContext, android.R.style.Theme_Translucent_NoTitleBar);
         WindowManager.LayoutParams lpWindow = new WindowManager.LayoutParams();
         lpWindow.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
@@ -40,7 +40,7 @@ public class DialogProductNumberPicker extends Dialog {
         numberPicker = (NumberPicker) findViewById(R.id.numberPicker);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(10);
-
+        numberPicker.setValue(num);
         btn_back = (Button) findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override

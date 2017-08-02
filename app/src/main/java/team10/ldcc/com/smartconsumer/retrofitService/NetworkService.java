@@ -21,6 +21,17 @@ import team10.ldcc.com.smartconsumer.Data.User;
  */
 public interface NetworkService {
 
+    @GET("/product/addCount/{productDetail_code}/{productDetail_count}")
+    Call<Product> addCount(@Path("productDetail_code") String productDetail_code,@Path("productDetail_count") String productDetail_count);
+
+    @GET("/cart/paymentProd/{cart_code}")
+    Call<Product> paymentCart(@Path("cart_code") String cart_code);
+
+    @GET("/cart/deleteProd/{cart_code}")
+    Call<Product> deleteCart(@Path("cart_code") String cart_code);
+
+    @GET("/cart/selectCart/{user_code}")
+    Call<List<Product>> selectCart(@Path("user_code") String user_code);
 
     @POST("/cart/insertProd")
     Call<Cart> addCart(@Body Cart cart);

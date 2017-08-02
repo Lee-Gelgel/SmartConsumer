@@ -34,7 +34,7 @@
     </style>
 
     <style name="DefaultButton">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/colorOrange</item>
     </style>

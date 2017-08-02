@@ -1,9 +1,14 @@
 package team10.ldcc.com.smartconsumer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -11,6 +16,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.laboratory.ldcc.wave.wave.Const;
+import com.laboratory.ldcc.wave.wave.WaveInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_register;
     private Toolbar toolbar;
 
+    private String WRITE_EXTERNAL_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getContentService();
-
 
         initLayout();
         setLayout();
@@ -58,6 +67,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int check = ActivityCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+                if (check == PackageManager.PERMISSION_GRANTED) {
+                    //Do something
+                } else {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},1024);
+                }
                 String email = edit_email.getText().toString();
 //                String pw = edit_pw.getText().toString();
                 if (StringUtil.isEmailValid(LoginActivity.this, email)){ // 이메일 유효성 검사
@@ -98,10 +113,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
+    String email;
     public void loginUser(){
         User user = new User();
-        String email = edit_email.getText().toString().trim();
+        email = edit_email.getText().toString().trim();
         String password = edit_pw.getText().toString().trim();
         user.setUser_email(email);
         user.setUser_password(password);
@@ -114,9 +129,21 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     Log.e("user ?",""+user.toString());
                     if (!"".equals(user.getUser_name()) && user.getUser_name() != null) {
+                        String[] packageInfo = getPackageInfo(getApplicationContext());
+                        int createResult=
+                                WaveInfo.getInstance().create("http://210.93.181.131:8080",packageInfo,"ldcctest","84test84test",2,getApplicationContext());
+                        if(createResult== Const.CREATE_OK){
+                            WaveInfo.getInstance().sendRegistrationInfoToServer(getApplicationContext());
+                            Log.d("로미오 : ","등록 성공");
+                        }else{
+                            Log.d("로미오 : ","등록 실패");
+                        }
+                        WaveInfo.getInstance().getWaveUUID(LoginActivity.this);
+                        WaveInfo.getInstance().getWaveCustNo(LoginActivity.this);
                         ApplicationController.getInstance().setUser(user);
                         ApplicationController.getInstance().setLogin(true);
                         Toast.makeText(LoginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
                         Log.e("getUser ?",""+ApplicationController.getInstance().getUser());
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 //                        setResult(RESULT_OK, intent);
@@ -137,9 +164,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-
+    private String[] getPackageInfo(Context context) {
+        String[] packageInfo = new String[2];
+        packageInfo[0] = context.getPackageName();
+        try{
+            PackageInfo i = context.getPackageManager().getPackageInfo(context.getPackageName(),0);
+            packageInfo[1] = i.versionName;
+            return packageInfo;
+        }catch(Exception e){
+            packageInfo[1]="NotDetected";
+            return packageInfo;
+        }
+    }
 
 
     private final long FINISH_INTERVAL_TIME = 2000;
@@ -160,5 +196,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
 }

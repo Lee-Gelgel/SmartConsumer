@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.laboratory.ldcc.wave.wave.WaveInfo;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.zhangjingjing.autoscrolbanner.CycleViewpager;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private LayoutInflater inflater;
     private FrameLayout frame;
     private DialogProductDetail dialogProductDetail;
+    private DialogProductDetail2 dialogProductDetail2;
     private DialogProductNumberPicker dialogProductNumberPicker;
     private DatePickerDialog dialogDatePicker;
     private DialogProducDelivery dialogProducDelivery;
@@ -125,10 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_barcodeScanner:
 
-//                Product product = new Product("5","샤프란 케어", "섬유탈취제 샤프란 케어 은은한 향" ,"8801051262995", "/images/product/01.jpeg");
-//                product_code = "11";
-//                dialogProductDetail = new DialogProductDetail(MainActivity.this,product, click_add_cart);
-//                dialogProductDetail.show();
+
+                //barcodeScanner("9421023610112","8");
 
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setCaptureActivity(CaptureActivityAnyOrientation.class);
@@ -225,8 +225,17 @@ public class MainActivity extends AppCompatActivity {
 //                    Product product = new Product("5","샤프란 케어", "섬유탈취제 샤프란 케어 은은한 향" ,"8801051262995", "/images/product/01.jpeg");
                     product_code = response.body().getProduct_code();
 
-                    dialogProductDetail = new DialogProductDetail(MainActivity.this,response.body(), click_add_cart);
-                    dialogProductDetail.show();
+//                    dialogProductDetail = new DialogProductDetail(MainActivity.this,response.body(), click_add_cart);
+//                    dialogProductDetail.show();
+
+                    Log.e(TAG,"bs : "+response.body());
+
+                    dialogProductDetail2 = new DialogProductDetail2(MainActivity.this,response.body());
+                    dialogProductDetail2.show();
+
+
+
+
 //                    Util.alertMsg(MainActivity.this, response.body().toString(), new DialogInterface.OnClickListener() {
 //                        @Override
 //                        public void onClick(DialogInterface dialog, int which) {
@@ -254,6 +263,9 @@ public class MainActivity extends AppCompatActivity {
     private CycleViewpager mAutoVp;
     private PagerIndicator mIndicator;
     private List<String> imgUrls;
+
+
+
     private void selectTop10(){
         Call<List<Product>> call = networkService.selectTop10();
         call.enqueue(new Callback<List<Product>>() {
@@ -281,10 +293,93 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // cart page
-    private List<Cart> cartList;
+    private void deleteCart(String cart_code){
+        Call<Product> call = networkService.deleteCart(cart_code);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "장바구니에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    selectCart();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.e("error", "서버 onFailure : " + t.getMessage());
+            }
+        });
+    }
+
+    private void paymentCart(String cart_code){
+        Call<Product> call = networkService.paymentCart(cart_code);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "결제되었습니다.", Toast.LENGTH_SHORT).show();
+                    selectCart();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.e("error", "서버 onFailure : " + t.getMessage());
+            }
+        });
+    }
+
+    private void addCount(String productDetail_code, String productDetail_count){
+        Call<Product> call = networkService.addCount(productDetail_code, productDetail_count);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.e("error", "서버 onFailure : " + t.getMessage());
+            }
+        });
+    }
+
+
+    private void selectCart(){
+        Call<List<Product>> call = networkService.selectCart(ApplicationController.getInstance().getUser().getUser_code());
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                cartList = new ArrayList<Product>();
+                cartList = response.body();
+                for(Product c : cartList){
+                    Log.e(TAG,"cartList :"+c.toString());
+                }
+                recyclerView_cart = (RecyclerView) view_cart.findViewById(R.id.recyclerView_cart);
+                recyclerView_cart.setHasFixedSize(true);
+
+                recyclerView_cart.setNestedScrollingEnabled(false);
+                LinearLayoutManager mLayoutManager_cart = new LinearLayoutManager(MainActivity.this);
+                recyclerView_cart.setLayoutManager(mLayoutManager_cart);
+                adapter_cart = new CartRecyclerAdapter(cartList, MainActivity.this);
+                recyclerView_cart.setAdapter(adapter_cart);
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e("error", "서버 onFailure : " + t.getMessage());
+            }
+        });
+    }
+    private List<Product> cartList;
     private RecyclerView recyclerView_cart;
     private CartRecyclerAdapter adapter_cart;
-
+    private View view_cart;
+    private Button btn_select;
+    private Button btn_delete;
+    private Button btn_payment;
     // setting page
     private Button button_logout;
     private Button button_modify;
@@ -302,13 +397,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "" + 0);
 //                productList = new ArrayList<>();
                 imgUrls = new ArrayList<>();
-                imgUrls.add("http://52.78.34.142:3000/images/home/img_home.png");
-                imgUrls.add("http://52.78.34.142:3000/images/home/img_home2.jpg");
+                imgUrls.add("http://52.78.34.142:3000/images/home/banner1.png");
+                imgUrls.add("http://52.78.34.142:3000/images/home/banner2.png");
+                imgUrls.add("http://52.78.34.142:3000/images/home/banner3.png");
                 mAutoVp = (CycleViewpager) view.findViewById(R.id.vp_auto);
                 mIndicator = (PagerIndicator) view.findViewById(R.id.pi_indicator);
                 MyPagerAdapter adaptermy = new MyPagerAdapter(this, imgUrls);
                 mAutoVp.setAdapter(adaptermy);
-                mAutoVp.setOffscreenPageLimit(2);
+                mAutoVp.setOffscreenPageLimit(3);
                 mAutoVp.startAutoScroll();
                 mIndicator.setViewpager(mAutoVp);
 
@@ -320,29 +416,39 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 view = inflater.inflate(R.layout.activity_cart, frame, false);
+                view_cart = view;
+                selectCart();
+                btn_select = (Button) view.findViewById(R.id.btn_select);
+                btn_select.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                cartList = new ArrayList<>();
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
-                cartList.add(new Cart("상품","1","2017.08.05","/image/public/01.jpeg"));
+                    }
+                });
+                btn_delete = (Button) view.findViewById(R.id.btn_delete);
+                btn_delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        for(Product p : adapter_cart.returnList()){
+                            if(p.getProduct_check()!=null && p.getProduct_check()){
+                                deleteCart(p.getCart_code());
+                            }
+                        }
+                    }
+                });
+                btn_payment = (Button) view.findViewById(R.id.btn_payment);
+                btn_payment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        for(Product p : adapter_cart.returnList()){
+                            if(p.getProduct_check()!=null && p.getProduct_check()){
+                                paymentCart(p.getCart_code());
+                                addCount(p.getProductDetail_code(),p.getProduct_count());
+                            }
+                        }
 
-
-
-                recyclerView_cart = (RecyclerView) view.findViewById(R.id.recyclerView_cart);
-                recyclerView_cart.setHasFixedSize(true);
-
-                recyclerView_cart.setNestedScrollingEnabled(false);
-                LinearLayoutManager mLayoutManager_cart = new LinearLayoutManager(MainActivity.this);
-                recyclerView_cart.setLayoutManager(mLayoutManager_cart);
-                adapter_cart = new CartRecyclerAdapter(cartList, MainActivity.this);
-                recyclerView_cart.setAdapter(adapter);
-
+                    }
+                });
                 Log.e(TAG,""+1);
                 break;
             case 2:
@@ -388,6 +494,7 @@ public class MainActivity extends AppCompatActivity {
             ApplicationController.getInstance().setUser(null);
             ApplicationController.getInstance().setLogin(false);
             Toast.makeText(MainActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            WaveInfo.getInstance().remove(getApplicationContext());
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
@@ -449,6 +556,5 @@ public class MainActivity extends AppCompatActivity {
             container.addView(imageView, lp);
             return imageView;
         }
-
     }
 }

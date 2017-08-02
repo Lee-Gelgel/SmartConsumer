@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Gelgel on 2017. 7. 27..
  */
 public class Product implements Serializable{
+    private String cart_code;
     private String product_code;
     private String product_name;
     private String product_info;
@@ -15,28 +16,48 @@ public class Product implements Serializable{
     private String productDetail_code;
     private String productBase_code;
     private String productBase_weight;
-
-    public Product(String product_code, String product_name, String product_info, String product_price, String product_image) {
-        this.product_code = product_code;
-        this.product_name = product_name;
-        this.product_info = product_info;
-        this.product_price = product_price;
-        this.product_image = product_image;
-    }
-
-
+    private String product_delivery;
+    private Boolean product_check;
 
     @Override
     public String toString() {
         return "Product{" +
-                "productBase_code='" + productBase_code + '\'' +
-                ", productDetail_code='" + productDetail_code + '\'' +
-                ", product_image='" + product_image + '\'' +
-                ", product_price='" + product_price + '\'' +
-                ", product_info='" + product_info + '\'' +
+                "product_code='" + product_code + '\'' +
                 ", product_name='" + product_name + '\'' +
-                ", product_code='" + product_code + '\'' +
+                ", product_info='" + product_info + '\'' +
+                ", product_price='" + product_price + '\'' +
+                ", product_count='" + product_count + '\'' +
+                ", product_image='" + product_image + '\'' +
+                ", productDetail_code='" + productDetail_code + '\'' +
+                ", productBase_code='" + productBase_code + '\'' +
+                ", productBase_weight='" + productBase_weight + '\'' +
+                ", product_delivery='" + product_delivery + '\'' +
                 '}';
+    }
+
+
+    public String getCart_code() {
+        return cart_code;
+    }
+
+    public void setCart_code(String cart_code) {
+        this.cart_code = cart_code;
+    }
+
+    public Boolean getProduct_check() {
+        return product_check;
+    }
+
+    public void setProduct_check(Boolean product_check) {
+        this.product_check = product_check;
+    }
+
+    public String getProduct_delivery() {
+        return product_delivery;
+    }
+
+    public void setProduct_delivery(String product_delivery) {
+        this.product_delivery = product_delivery;
     }
 
     public String getProductBase_weight() {

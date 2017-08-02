@@ -55,7 +55,18 @@ public class DialogProducDelivery2 extends Dialog  {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
                 Log.e("aaa",""+getSelectedDatesString());
-                delivery = date.getYear()+""+(date.getMonth()+1)+""+date.getDay();
+                String month = "";
+                if((date.getMonth()+1)<=9){
+                    month += "0";
+                }
+                month+=(date.getMonth()+1);
+
+                String day = "";
+                if(date.getDay()<=9){
+                    day +=  "0";
+                }
+                day += date.getDay();
+                delivery = date.getYear()+""+month+""+day;
             }
         });
 //        widget.setOnMonthChangedListener(this);
